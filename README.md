@@ -15,3 +15,7 @@ To work around the fact that K.argmax/tf.argmax is not differentiable, here is a
 |3| 2.9999998129252115|
 |7| 6.599979662770566|
 |3| 3.0000489993240986|
+
+## Limitations ##
+
+If the maximum value is not unique along the axis that we're applying the argmax function to, the result will be an average between the two indices. For example, suppose we had a simple vector [10,0,0,0,10]. The output of this function will be 2. The regular argmax has a different limitation, as it typically returns the first index of the maximum argument. However, that is arguably more correct then averaging the indices.
