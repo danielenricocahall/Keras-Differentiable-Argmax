@@ -1,8 +1,6 @@
 import tensorflow as tf
 
 
-# Pseudo-math for the below
-
 def differentiable_argmax_approx(x, beta=1e2):
     """
     Approximation of argmax - translates to y = sum( i * exp(beta * x[i]) ) / sum( exp(beta * x[i]) )
