@@ -1,6 +1,10 @@
 # Keras-Differentiable-Argmax #
 
-To work around the fact that K.argmax/tf.argmax is not differentiable, here is an approximation to the argmax function which is tunable by parameter beta. The implementation is based on a StackOverflow discussion (https://stackoverflow.com/questions/46926809/getting-around-tf-argmax-which-is-not-differentiable), and I figured it would be worth having cleaned up/usable in one place. To show an example of how it worked, I have also provided a simple demo script. If you have any questions or suggestions, please feel free to let me know!
+To work around the fact that `K.argmax`/`tf.argmax` is not differentiable, here is an approximation to the `argmax` function which is tunable by parameter beta. The implementation is based on a StackOverflow discussion (https://stackoverflow.com/questions/46926809/getting-around-tf-argmax-which-is-not-differentiable), and I figured it would be worth having cleaned up/usable in one place. To show an example of how it worked, I have provided two test cases. If you have any questions or suggestions, please feel free to let me know!
+
+## Running Tests ##
+
+To run the tests, install the virtual environment with `pipenv install .`, navigate into the environment (`pipenv shell`) or configure the environment in your IDE, then run `pytest .` in the project directory. Both tests should execute and pass.
 
 ## Example Output ##
 | Argmax | Argmax Approx. |
@@ -16,6 +20,7 @@ To work around the fact that K.argmax/tf.argmax is not differentiable, here is a
 |7| 6.599979662770566|
 |3| 3.0000489993240986|
 
+
 ## Limitations ##
 
-If the maximum value is not unique along the axis that we're applying the argmax function to, the result will be an average between the two indices. For example, suppose we had a simple vector [10,0,0,0,10]. The output of this function will be 2. The regular argmax has a different limitation, as it typically returns the first index of the maximum argument. However, that is arguably more correct then averaging the indices.
+If the maximum value is not unique along the axis that we're applying the argmax function to, the result will be an average between the two indices, as shown in `test_argmax_approx_multiple_max`. The regular `argmax` has a different limitation, as it typically returns the first index of the maximum argument. However, that is arguably more correct then averaging the indices.
